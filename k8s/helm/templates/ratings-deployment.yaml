@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: bookinfo-dev-ratings
-  namespace: student46-bookinfo-dev
+  namespace: fuse-bookinfo-dev
   labels:
     app: bookinfo-dev-ratings
 spec:

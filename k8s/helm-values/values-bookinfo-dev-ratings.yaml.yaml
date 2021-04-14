@@ -1,5 +1,5 @@
 ratings:
-  namespace: student46-bookinfo-dev
+  namespace: fuse-bookinfo-dev
   image: ghcr.io/fxselazy/bookinfo-ratings
   tag: dev
   replicas: 1

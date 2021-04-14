@@ -1,6 +1,6 @@
 ratings:
-  namespace: student46-bookinfo-uat
-  image: ghcr.io/fxselazt/bookinfo-ratings
+  namespace: fuse-bookinfo-uat
+  image: ghcr.io/fxselazy/bookinfo-ratings
   tag: uat
   replicas: 1
   imagePullSecrets: registry-bookinfo
