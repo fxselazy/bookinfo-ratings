@@ -1,20 +1,16 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /$2
   name: bookinfo-dev-ratings
-  namespace: fuse-bookinfo-dev
 spec:
   rules:
-  - host: bookinfo.dev.opsta.net
-    http:
+  - http:
       paths:
       - path: /fuse/ratings(/|$)(.*)
         pathType: Prefix
         backend:
-          service:
-            name: bookinfo-dev-ratings
-            port:
-              number: 8080
+          serviceName: {{ .Release.Name }}
+          servicePort: {{ .Values.ratings.port }}
