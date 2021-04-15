@@ -13,8 +13,8 @@ ingress:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
   # host: bookinfo.dev.opsta.net
   # path: "/student46/ratings(/|$)(.*)"
-    host: bookinfo.dev.hellodolphin.in.th
-    path: "/fuse/ratings(/|$)(.*)"
+  host: bookinfo.dev.hellodolphin.in.th
+  path: "/fuse/ratings(/|$)(.*)"
   serviceType: ClusterIP
 extraEnv:
   SERVICE_VERSION: v2
