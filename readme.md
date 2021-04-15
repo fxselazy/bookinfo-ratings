@@ -34,4 +34,4 @@ docker run -d --name ratings -p 8080:8080 --link mongodb:mongodb \
 docker-compose up
 ```
 
-## Test path
+### Test with path `/ratings/1` and `/health`
