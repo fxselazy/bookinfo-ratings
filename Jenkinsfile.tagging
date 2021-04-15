@@ -59,7 +59,7 @@ spec:
         container('docker') {
           script {
             // Do docker login authentication
-            docker.withRegistry('https://ghcr.io', 'github_registry') {
+            docker.withRegistry('https://ghcr.io', 'github-registry') {
               // Pulling UAT Image
               uatImage = docker.image("ghcr.io/fxselazy/bookinfo-ratings:uat")
               uatImage.pull()
