@@ -79,7 +79,7 @@ spec:
             // Use kubeconfig from Jenkins Credential
             withKubeConfig([credentialsId: 'kubeconfig']) {
               // Run Helm upgrade
-              sh "helm upgrade -i -f k8s/helm-values/value-bookinfo-${ENV_NAME}-ratings.yaml --wait \
+              sh "helm upgrade -i -f k8s/helm-values/values-bookinfo-${ENV_NAME}-ratings.yaml --wait \
                 --set extraEnv.COMMIT_ID=${scmVars.GIT_COMMIT} \
                 --namespace fuse-bookinfo-${ENV_NAME} bookinfo-${ENV_NAME}-ratings k8s/helm"
             } // End withKubeConfig
