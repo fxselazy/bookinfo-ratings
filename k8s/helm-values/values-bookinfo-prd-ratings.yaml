@@ -1,5 +1,5 @@
 ratings:
-  namespace: fuse-bookinfo-dev
+  namespace: fuse-bookinfo-prd
   image: ghcr.io/fxselazy/bookinfo-ratings
   tag: prd
   replicas: 1

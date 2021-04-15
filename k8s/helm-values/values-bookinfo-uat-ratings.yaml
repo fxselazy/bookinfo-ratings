@@ -1,5 +1,5 @@
 ratings:
-  namespace: fuse-bookinfo-dev
+  namespace: fuse-bookinfo-uat
   image: ghcr.io/fxselazy/bookinfo-ratings
   tag: uat
   replicas: 1
