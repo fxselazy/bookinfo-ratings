@@ -10,7 +10,7 @@ ratings:
 ingress:
   annotations:
     kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    nginx.ingress.kubernetes.io/rewrite-target: /$2s
   # host: bookinfo.dev.opsta.net
   # path: "/student46/ratings(/|$)(.*)"
   host: bookinfo.uat.hellodolphin.in.th
@@ -18,6 +18,6 @@ ingress:
   serviceType: ClusterIP
 extraEnv:
   SERVICE_VERSION: v2
-  MONGO_DB_URL: mongodb://bookinfo-dev-ratings-mongodb:27017/?authSource=ratings
+  MONGO_DB_URL: mongodb://bookinfo-uat-ratings-mongodb:27017/?authSource=ratings
   MONGO_DB_NAME: ratings
   COMMIT_Id: CHANGEME
