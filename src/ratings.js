@@ -14,11 +14,8 @@
 
 var http = require('http')
 var dispatcher = require('httpdispatcher')
-
 var port = parseInt(process.argv[2])
-
 var userAddedRatings = [] // used to demonstrate POST functionality
-
 var unavailable = false
 var healthy = true
 
@@ -77,7 +74,6 @@ dispatcher.onPost(/^\/ratings\/[0-9]*/, function (req, res) {
     res.end(JSON.stringify({error: 'please provide numeric product ID'}))
     return
   }
-
   try {
     ratings = JSON.parse(req.body)
   } catch (error) {
@@ -85,7 +81,6 @@ dispatcher.onPost(/^\/ratings\/[0-9]*/, function (req, res) {
     res.end(JSON.stringify({error: 'please provide valid ratings JSON'}))
     return
   }
-
   if (process.env.SERVICE_VERSION === 'v2') { // the version that is backed by a database
     res.writeHead(501, {'Content-type': 'application/json'})
     res.end(JSON.stringify({error: 'Post not implemented for database backed ratings'}))
@@ -105,7 +100,6 @@ dispatcher.onGet(/^\/ratings\/[0-9]*/, function (req, res) {
   } else if (process.env.SERVICE_VERSION === 'v2') {
     var firstRating = 0
     var secondRating = 0
-
     if (process.env.DB_TYPE === 'mysql') {
       var connection = mysql.createConnection({
         host: hostName,
@@ -114,7 +108,6 @@ dispatcher.onGet(/^\/ratings\/[0-9]*/, function (req, res) {
         password: password,
         database: 'test'
       })
-
       connection.connect(function(err) {
           if (err) {
               res.end(JSON.stringify({error: 'could not connect to ratings database'}))
