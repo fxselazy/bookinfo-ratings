@@ -29,6 +29,11 @@ spec:
     command:
     - cat
     tty: true
+  - name: skan
+    image: alcide/skan:v0.9.0-debug
+    command:
+    - cat
+    tty: true
   - name: java-node
     image: timbru31/java-node:11-alpine-jre-14
     command:
@@ -63,6 +68,30 @@ spec:
         } // End container
       } // End steps
     } // End stage
+
+    // ***** Stage sKan *****
+    stage('sKan') {
+        steps {
+            container('helm') {
+                script {
+                    // Generate k8s-manifest-deploy.yaml for scanning
+                    sh "helm template -f k8s/helm-values/values-bookinfo-${ENV_NAME}-ratings.yaml \
+                        --set extraEnv.COMMIT_ID=${scmVars.GIT_COMMIT} \
+                        --namespace fuse-bookinfo-${ENV_NAME} bookinfo-${ENV_NAME}-ratings k8s/helm \
+                        > k8s-manifest-deploy.yaml"
+                }
+            }
+            container('skan') {
+                script {
+                    // Scanning with sKan
+                    sh "/skan manifest -f k8s-manifest-deploy.yaml"
+                    // Keep report as artifacts
+                    archiveArtifacts artifacts: 'skan-result.html'
+                    sh "rm k8s-manifest-deploy.yaml"
+                }
+            }
+        }
+    }
 
     // ***** Stage Sonarqube *****
     stage('Sonarqube Scanner') {
