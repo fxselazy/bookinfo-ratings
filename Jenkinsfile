@@ -39,6 +39,13 @@ spec:
     command:
     - cat
     tty: true
+    volumeMounts:
+    - mountPath: /home/jenkins/dependency-check-data
+      name: dependency-check-data
+  volumes:
+  - name: dependency-check-data
+    hostPath:
+      path: /tmp/dependency-check-data
 """
     } // End kubernetes
   } // End agent
