@@ -148,7 +148,7 @@ dispatcher.onGet(/^\/ratings\/[0-9]*/, function (req, res) {
           connection.end()
       })
     } else {
-      MongoClient.connect(url, options, function (err, db) {
+      MongoClient.connect(url, options, function (err, client) {
         if (err) {
           var db = client.db(process.env.MONGO_DB_NAME)
           res.writeHead(500, {'Content-type': 'application/json'})
