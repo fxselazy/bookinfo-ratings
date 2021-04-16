@@ -106,7 +106,7 @@ spec:
             container('java-node'){
                 script {
                     // Authentiocation with https://sonarqube.hellodolphin.in.th
-                    withSonarQubeEnv('sonarqube_scanner') {
+                    withSonarQubeEnv('sonarqube-scanner') {
                         // Run Sonar Scanner
                         sh '''${SCANNER_HOME}/bin/sonar-scanner \
                         -D sonar.projectKey=${PROJECT_KEY} \
