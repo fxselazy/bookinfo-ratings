@@ -87,7 +87,7 @@ spec:
                         --namespace fuse-bookinfo-${ENV_NAME} bookinfo-${ENV_NAME}-ratings k8s/helm \
                         > k8s-manifest-deploy.yaml"
                 }
-            }
+            } // End container
             container('skan') {
                 script {
                     // Scanning with sKan
@@ -96,16 +96,16 @@ spec:
                     archiveArtifacts artifacts: 'skan-result.html'
                     sh "rm k8s-manifest-deploy.yaml"
                 }
-            }
-        }
-    }
+            } // End container
+        }  // End steps
+    } // End stage
 
     // ***** Stage Sonarqube *****
     stage('Sonarqube Scanner') {
         steps {
             container('java-node'){
                 script {
-                    // Authentiocation with https://sonarqube.hellodolphin.in.th
+                    // Authentiocation with http://sonarqube.hellodolphin.in.th
                     withSonarQubeEnv('sonarqube-scanner') {
                         // Run Sonar Scanner
                         sh '''${SCANNER_HOME}/bin/sonar-scanner \
@@ -114,7 +114,7 @@ spec:
                         -D sonar.projectVersion=${BRANCH_NAME}-${BUILD_NUMBER} \
                         -D sonar.sources=./src
                         '''
-                    }//End withSonarQubeEnv
+                    } // End withSonarQubeEnv
                     // Run Quality Gate
                     timeout(time: 1, unit: 'MINUTES') { 
                         def qg = waitForQualityGate()
@@ -168,6 +168,19 @@ spec:
       } // End steps
     } // End stage
     
+    // ***** Stage Anchore *****
+    stage('Anchore Engine') {
+        steps {
+            container('jnlp') {
+                script {
+                    // dend Docker Image to Anchore Analyzer
+                    writeFile file: 'anchore_images' , text: "ghcr.io/fxselazy/bookinfo-ratings:${ENV_NAME}"
+                    anchore name: 'anchore_images' , bailOnFail: false
+                } // End script
+            } // End container
+        } // End steps
+    } // End stage
+
     stage('Deploy ratings with Helm Chart') {
       steps {
         // Run on Helm container
