@@ -6,6 +6,6 @@ appVersion: 1.0.0
 home: https://bookinfo.dev.opsta.net/student46/ratings
 maintainers:
   - name: student46
-    email: devop46@mail.kmutt.ac.th
+    email: devop046@mail.kmutt.ac.th
 sources:
-  - https://github.com/fxselazy
+  - https://github.com/fxselazy/bookinfo-ratings
